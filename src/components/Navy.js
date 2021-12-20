@@ -1,8 +1,19 @@
 import React from "react";
 import { Navbar, Container, Nav, NavDropdown } from "react-bootstrap";
 import { Link } from "react-router-dom";
+import { useSelector, useDispatch } from "react-redux";
+import CartCount from "../components/CartCount";
+import { logout } from "../feautres/LoginSlice";
+import { BsFillBasket2Fill } from "react-icons/bs";
 
 export default function Navy() {
+  const { user } = useSelector((state) => state.loginSlice);
+  const dispatch = useDispatch();
+
+  {
+    /* useman wargrtotawane boaway cheky pebkain agar user login bw ba login
+ bkat ba logout w har la page homeda bmenetawane*/
+  }
   return (
     <div>
       <Navbar collapseOnSelect expand="lg" bg="dark" variant="dark">
@@ -18,9 +29,13 @@ export default function Navy() {
                 About
               </Nav.Link>
 
-              <Nav.Link as={Link} to="/product/all">
+              {/* <Nav.Link as={Link} to="/product/all">
                 Product
-              </Nav.Link>
+              </Nav.Link> */}
+              {/*  */}
+              {/* <Nav.Link as={Link} to="/CartselectorToBuy">
+              CartselectorToBuy
+              </Nav.Link> */}
 
               <NavDropdown title="product" id="collasible-nav-dropdown">
                 <NavDropdown.Item as={Link} to="/products/ios">
@@ -41,15 +56,65 @@ export default function Navy() {
                 setting
               </Nav.Link> */}
               <Nav.Link as={Link} to="/cartselectortobuy">
-                CartselectorToBuy
+                <div style={{ padding: "0px", margin: "0px" ,display:"flex" }}>
+                  <div style={{ float: "right", minwidth: "initial"  }}>
+                    <CartCount />
+                  </div>
+                  <div>
+                    C<BsFillBasket2Fill />RT
+                  </div>
+
+                  {/* <CartCount />
+                  <BsFillBasket2Fill /> */}
+                </div>
+                {/* Cart */}
               </Nav.Link>
 
+              {/* 
+              <Nav.Link as={Link} to="/cartselectortobuy">
+                <div>
+                  <CartCount />
+                </div>
+                CartselectorToBuy
+              </Nav.Link> */}
               <NavDropdown title="Setting" id="collasible-nav-dropdown">
-                <NavDropdown.Item as={Link} to="/login">
+                {/* <NavDropdown.Item as={Link} to="/login">
                   login
-                </NavDropdown.Item>
-                <NavDropdown.Item as={Link} to="/register">
+                </NavDropdown.Item> */}
+                {!user && (
+                  // ama ale agar useraka nabw wata login nrabw awa ba login bkat
+                  <NavDropdown.Item as={Link} to="/login">
+                    login
+                  </NavDropdown.Item>
+                )}
+                {user && (
+                  //  ama ale agar login krabw wata user habw ba login darnaxa balku logout darxat w la homa bmenetawane
+                  <NavDropdown.Item
+                    as={Link}
+                    to="/"
+                    onClick={() => {
+                      dispatch(logout());
+                    }}
+                  >
+                    logout
+                  </NavDropdown.Item>
+                )}
+
+                {/* <NavDropdown.Item as={Link} to="/login">
+                  login
+                </NavDropdown.Item> */}
+                {/* <NavDropdown.Item as={Link} to="/register">
                   register
+                </NavDropdown.Item> */}
+
+                {!user && (
+                  <NavDropdown.Item as={Link} to="/register">
+                    register
+                  </NavDropdown.Item>
+                )}
+
+                <NavDropdown.Item as={Link} to="/personalinformation">
+                  personalInformation
                 </NavDropdown.Item>
               </NavDropdown>
             </Nav>
@@ -58,4 +123,31 @@ export default function Navy() {
       </Navbar>
     </div>
   );
+}
+
+{
+  /* {!user && (
+                  // ama ale agar useraka nabw wata login nrabw awa ba login bkat
+                  <NavDropdown.Item as={Link} to="/login">
+                    login
+                  </NavDropdown.Item>
+                )} */
+}
+
+{
+  /* 
+  {user && (
+                  //  ama ale agar login krabw wata user habw ba login darnaxa balku logout darxat w la homa bmenetawane
+                  <NavDropdown.Item
+                    as={Link}
+                    to="/"
+                    onClick={() => {
+                      dispatch(logout());
+                    }}
+                  >
+                    logout
+                  </NavDropdown.Item>)
+                } 
+                
+                */
 }

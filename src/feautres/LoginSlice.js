@@ -1,26 +1,8 @@
-// la index store login abe esh bobkay 
-// https://redux.js.org/tutorials/quick-start linky sitakay
 import { createSlice } from "@reduxjs/toolkit";
-
-
-const localData = () => {
-  try {
-    const serializedState = localStorage.getItem("cart");
-    if (serializedState === null) {
-      return [];
-    }
-    return JSON.parse(serializedState);
-  } catch (err) {
-    // return undefined;
-    return err;
-  }
-};
-console.log(localData());
+// localStorage.getItem("localUser") || undefined
+// JSON.parse(localStorage.getItem("localUser") || undefined) ama boya parse krawa chunka  amawe la personalinformation dataka wargrmawane
 const initialState = {
-  value: {
-    email: "",
-    password: "",
-  },
+  user: JSON.parse(localStorage.getItem("localUser")) || undefined,
 };
 
 const userSlice = createSlice({
@@ -28,12 +10,12 @@ const userSlice = createSlice({
   initialState,
   reducers: {
     login: (state, action) => {
-      state.value.email = action.payload.email;
-      state.value.password = action.payload.password;
+      state.user = action.payload;
+      localStorage.setItem("localUser", JSON.stringify(action.payload));
     },
-    logout: (state) => {
-      state.value.email = "";
-      state.value.password = "";
+    logout: (state, action) => {
+      state.user = undefined;
+      localStorage.removeItem("localUser");
     },
   },
 });

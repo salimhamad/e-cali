@@ -7,11 +7,7 @@ import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
   // value: storeLocalg,
-  value: {
-    email: "",
-    password: "",
-    reEnterPassword: "",
-  },
+  user: localStorage.getItem("localUser") || undefined,
 };
 
 const userSlice = createSlice({
@@ -19,9 +15,8 @@ const userSlice = createSlice({
   initialState,
   reducers: {
     register: (state, action) => {
-      state.value.email = action.payload.email;
-      state.value.password = action.payload.password;
-      state.value.reEnterPassword = action.payload.reEnterPassword;
+      state.user = action.payload;
+      localStorage.setItem("localUser", JSON.stringify(action.payload));
       // localStorage.setItem("registerLS", JSON.stringify(state.value));
     },
   },
@@ -50,3 +45,4 @@ export default userSlice.reducer;
 //      value: storeLocalg(),
 
 // };
+//  pewystnakat register slice habet chunka tanya user drwsakayt wa mamosta bo regster boya bakary yanawa chunka ayawe ka login k nayatawa sar regster

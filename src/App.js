@@ -9,7 +9,7 @@ import Home from "./page/Home";
 import About from "./page/About";
 import Product from "./page/Product";
 import Setting from "./page/Setting";
-
+import Personalinformation from "../src/components/Personalinformation";
 import CartselectorToBuy from "./page/CartselectorToBuy";
 
 import FullDetailDvice from "./components/FullDetailDvice";
@@ -26,7 +26,7 @@ function App() {
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/about" element={<About />} />
-          <Route path="/product/all" element={<Product />} />
+          {/* <Route path="/product/all" element={<Product />} /> */}
           {/* full detail card  id haryakayan waragre ka clik la butonaka k awbata naw full pagekayawa */}
           <Route path="/product/:id" element={<FullDetailDvice />} />
           {/* category ya kany dropdown product  bo haryakayan  category haya ka ya ios ya android ya laptopa bas awwa ayaletawane la pruducta*/}
@@ -36,7 +36,13 @@ function App() {
 
           <Route path="/setting" element={<Setting />} />
           <Route path="/login" element={<Login />} />
+
           <Route path="/register" element={<Register />} />
+
+          <Route
+            path="/personalinformation"
+            element={<Personalinformation />}
+          />
         </Routes>
       </BrowserRouter>
     </div>

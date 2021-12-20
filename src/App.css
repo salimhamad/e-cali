@@ -36,3 +36,13 @@
     transform: rotate(360deg);
   }
 }
+
+.alldevicecsss {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+}
+.alldivisecard{
+  display: flex;
+  justify-self: center;
+}

@@ -51,21 +51,19 @@ const CartSlice = createSlice({
     //   // localStorage.setItem("cawnter", JSON.stringify(state.caunt));
     // },
     increment: (state, action) => {
-      state.cartIteem.map((product, index) => {
-        if (product.id === action.payload) {
-          state.count = state.count + 1;
-        }
-      });
+      let itemIndex = state.cartIteem.findIndex(
+        (product) => product.id === action.payload
+      );
+      state.cartIteem[itemIndex].count++;
+
+      localStorage.setItem("cart", JSON.stringify(state.cartIteem));
     },
     decrement: (state, action) => {
-      const items = state.cartIteem.map((product, index) => {
-        if (product.id === action.payload) {
-          product.count = product.count + 1;
-          return product;
-        }
-        return product;
-      });
-      state.cartIteem = items;
+      let itemIndex = state.cartIteem.findIndex(
+        (product) => product.id === action.payload
+      );
+      state.cartIteem[itemIndex].count--;
+      localStorage.setItem("cart", JSON.stringify(state.cartIteem));
     },
   },
 });
